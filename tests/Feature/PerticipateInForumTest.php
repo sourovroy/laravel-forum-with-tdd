@@ -28,4 +28,15 @@ class PerticipateInForumTest extends TestCase
             ->post('threads/channel/1/replies', [])
             ->assertRedirect('/login');
     }
+
+    public function testAReplyRequiresABody()
+    {
+        $this->withExceptionHandling()->singIn();
+
+        $thread = create('App\Models\Thread');
+        $reply = make('App\Models\Reply', ['body' => null]);
+
+        $this->post($thread->path().'/replies', $reply->toArray())
+            ->assertSessionHasErrors('body');
+    }
 }
