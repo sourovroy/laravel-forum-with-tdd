@@ -9,7 +9,7 @@ class ThreadController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only('store');
+        $this->middleware('auth')->except(['index', 'show']);
     }
 
     /**
@@ -22,13 +22,11 @@ class ThreadController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Show the form for creating a new thread.
      */
     public function create()
     {
-        
+        return view('threads/create');
     }
 
     /**

@@ -28,4 +28,11 @@ class CreateThreadTest extends TestCase
         $this->post('/threads', $thread->toArray());
     }
 
+    public function testGuestCannotSeeCreateThreadPage()
+    {
+        $this->withExceptionHandling()
+            ->get('/threads/create')
+            ->assertRedirect('/login');
+    }
+
 }
