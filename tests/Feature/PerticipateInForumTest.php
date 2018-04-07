@@ -24,7 +24,8 @@ class PerticipateInForumTest extends TestCase
 
     public function testUnauthenticatedUserNotAbleToReply()
     {
-        $this->expectException('Illuminate\Auth\AuthenticationException');
-        $this->post('threads/1/replies', []);
+        $this->withExceptionHandling()
+            ->post('threads/channel/1/replies', [])
+            ->assertRedirect('/login');
     }
 }

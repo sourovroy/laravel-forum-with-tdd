@@ -8,6 +8,9 @@ $factory->define(App\Models\Thread::class, function (Faker $faker) {
         'body' => $faker->paragraph,
         'user_id' => function(){
             return factory(App\Models\User::class)->create()->id;
+        },
+        'channel_id' => function(){
+            return factory(App\Models\Channel::class)->create()->id;
         }
     ];
 });

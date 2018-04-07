@@ -27,7 +27,7 @@ class ReplyController extends Controller
     /**
      * Store a newly created reply
      */
-    public function store(Request $request, Thread $thread)
+    public function store(Request $request, $channel, Thread $thread)
     {
         $thread->addReply([
             'body' => $request->get('body'),

@@ -11,19 +11,11 @@ class ThreadTest extends TestCase
 
     protected $thread;
 
-    public function setUp()
+    protected function setUp()
     {
         parent::setUp();
 
-        $this->thread = factory('App\Models\Thread')->create();
-    }
-
-    public function testThreadHasReplies()
-    {
-        $this->assertInstanceOf(
-            'Illuminate\Database\Eloquent\Collection', 
-            $this->thread->replies
-        );
+        $this->thread = create('App\Models\Thread');
     }
 
     public function testThreadHasCreator()
@@ -31,6 +23,14 @@ class ThreadTest extends TestCase
         $this->assertInstanceOf(
             'App\Models\User', 
             $this->thread->creator
+        );
+    }
+
+    public function testThreadHasReplies()
+    {
+        $this->assertInstanceOf(
+            'Illuminate\Database\Eloquent\Collection', 
+            $this->thread->replies
         );
     }
 
@@ -42,5 +42,21 @@ class ThreadTest extends TestCase
         ]);
 
         $this->assertCount(1, $this->thread->replies);
+    }
+
+    public function testThreadBelongsToAChannel()
+    {
+        $this->assertInstanceOf(
+            'App\Models\Channel', 
+            $this->thread->channel
+        );
+    }
+
+    public function testThreadHaveStringSlug()
+    {
+        $this->assertEquals(
+            '/threads/'.$this->thread->channel->slug.'/'.$this->thread->id, 
+            $this->thread->path()
+        );
     }
 }
