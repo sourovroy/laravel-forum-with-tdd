@@ -39,4 +39,17 @@ class ReadThreadsTest extends TestCase
         $this->get($this->thread->path())
             ->assertSee($reply->body);
     }
+
+    public function testUserCanBrowseThreadsByChannel()
+    {
+        $channel = create('App\Models\Channel');
+        $threadInChannel = create('App\Models\Thread', [
+            'channel_id' => $channel->id
+        ]);
+        $threadNotInChannel = create('App\Models\Thread');
+
+        $this->get('/threads/'.$channel->slug)
+            ->assertSee($threadInChannel->title)
+            ->assertDontSee($threadNotInChannel->title);
+    }
 }
