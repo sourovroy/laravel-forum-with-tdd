@@ -45,6 +45,7 @@
                                 @endforeach
                             </div>
                         </li>
+                        <li><a class="nav-link" href="/threads/create">Add Thread</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
