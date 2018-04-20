@@ -31,7 +31,7 @@ class PerticipateInForumTest extends TestCase
 
     public function testAReplyRequiresABody()
     {
-        $this->withExceptionHandling()->singIn();
+        $this->withExceptionHandling()->signIn();
 
         $thread = create('App\Models\Thread');
         $reply = make('App\Models\Reply', ['body' => null]);

@@ -11,7 +11,7 @@ class CreateThreadTest extends TestCase
 
     public function testAuthenticatedUserMayCreateThread()
     {
-        $this->singIn();
+        $this->signIn();
         $thread = make('App\Models\Thread');
 
         $response = $this->post('/threads', $thread->toArray());
@@ -56,7 +56,7 @@ class CreateThreadTest extends TestCase
 
     protected function publishThread($override = [])
     {
-        $this->withExceptionHandling()->singIn();
+        $this->withExceptionHandling()->signIn();
 
         $thread = make('App\Models\Thread', $override);
         return $this->post('/threads', $thread->toArray());
